@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="login-box">
+        <img src="../../assets/avatar.png" class="avatar">
+        <h1 style="text-transform: uppercase;">Bank Login</h1>
+        <form>
+            <p>Account Number</p>
+            <input type="text" name="accNo" #acno placeholder="Enter AccNo" id="acid">
+            <p>Password</p>
+            <input type="password" name="password" #psw placeholder="Enter Password" id="pid">
+            <input type="submit" name="submit" value="Login" (click)="login(acno,psw)">
+            <a href="#">Register Account</a>    
+        </form>           
+    </div>
+</body>
+</html>
