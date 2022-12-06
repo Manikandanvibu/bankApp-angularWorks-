@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1 class="text-center text-decoration-underline">ACCOUNT REGISTRATION</h1>
+    <form class="container w-50 p-5 mt-5">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Account number</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="uname">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputusername" class="form-label">username</label>
+          <input type="text" class="form-control" id="exampleInputusername" [(ngModel)]="acno">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="psw">
+        </div>
+        <div class="mb-3 text-center">
+         <button type="submit" class="btn btn-primary" (click)="register()">Register</button>
+        </div>
+      </form>
+</body>
+</html>

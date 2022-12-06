@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-page',
@@ -15,6 +16,11 @@ export class LoginPageComponent {
     1002:{acno:1002,username:"arun",password:123,balance:0},
     1003:{acno:1003,username:"mega",password:123,balance:0},
   }
+
+  // dependecy injection of router class of navigatebyurl
+  constructor(private router:Router){}
+
+  
   // // acc and psw chane capturing from input
   // acnoChange(event:any){
   //   this.acno=event.target.value
@@ -24,9 +30,31 @@ export class LoginPageComponent {
   //   this.psw=event.target.value
     
   // }
-  // // checks input and databse for login
-  // login(){
-  //   // var acno called to avoid calling this.acno
+  // checks input and databse for login
+  login(){
+    // var acno called to avoid calling this.acno
+    var acno=this.acno
+    var psw=this.psw
+    var userDetails=this.userDetails
+    if(acno in userDetails){
+      if(psw==userDetails[acno]["password"]){
+        alert("login successfull")
+        this.router.navigateByUrl("dashboard")
+      }
+      else{
+        alert("wrong password")
+      } 
+    }
+    else{
+      alert("user not excist")
+    }
+  }
+// 2- method
+  // login(a:any,b:any){
+
+  //   this.acno=a.value
+  //   this.psw=b.value
+
   //   var acno=this.acno
   //   var psw=this.psw
   //   var userDetails=this.userDetails
@@ -42,26 +70,5 @@ export class LoginPageComponent {
   //     alert("user not excist")
   //   }
   // }
-
-  login(a:any,b:any){
-    
-    this.acno=a.value
-    this.psw=b.value
-
-    var acno=this.acno
-    var psw=this.psw
-    var userDetails=this.userDetails
-    if(acno in userDetails){
-      if(psw==userDetails[acno]["password"]){
-        alert("login successfull")
-      }
-      else{
-        alert("wrong password")
-      } 
-    }
-    else{
-      alert("user not excist")
-    }
-  }
   
 }

@@ -9,14 +9,14 @@
 <body>
     <div class="login-box">
         <img src="../../assets/avatar.png" class="avatar">
-        <h1 style="text-transform: uppercase;">Bank Login</h1>
+        <h1 style="text-transform: uppercase;text-shadow: 2px 2px 4px #000000;">Bank Login</h1>
         <form>
             <p>Account Number</p>
-            <input type="text" name="accNo" #acno placeholder="Enter AccNo" id="acid">
+            <input type="text" name="accNo"  placeholder="Enter AccNo" id="acid" [(ngModel)]="acno" >
             <p>Password</p>
-            <input type="password" name="password" #psw placeholder="Enter Password" id="pid">
-            <input type="submit" name="submit" value="Login" (click)="login(acno,psw)">
-            <a href="#">Register Account</a>    
+            <input type="password" name="password"  placeholder="Enter Password" id="pid" [(ngModel)]="psw" >
+            <input type="submit" name="submit" value="Login" (click)="login()">
+            <a routerLink="register">Register Account</a>    
         </form>           
     </div>
 </body>
