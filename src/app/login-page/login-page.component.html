@@ -10,7 +10,7 @@
     <div class="login-box">
         <img src="../../assets/avatar.png" class="avatar">
         <h1 style="text-transform: uppercase;text-shadow: 2px 2px 4px #000000;">Bank Login</h1>
-        <form>
+        <form (ngSubmit)="login()">
             <p>Account Number</p>
             <input type="text" name="accNo"  placeholder="Enter AccNo" id="acid" [(ngModel)]="acno" >
             <p>Password</p>

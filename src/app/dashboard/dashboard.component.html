@@ -1,1 +1,53 @@
-<h1>dashboard works!</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+  <h1 class="p-4 text-white">welcome {{user}}</h1>
+
+  <a routerLink="/transcation" class="p-4 ms-3 border border-white" style="background-color: rgb(221, 235, 236); text-decoration: none; border-radius: 20px;" >view transcation history</a>
+
+    <h1 class="text-center text-decoration-underline">DEPOSIT</h1>
+    <form class="container w-50 p-5 mt-5" (ngSubmit)="deposit()">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Account number</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="acno" name="accNo">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="psw" name="password">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputusername" class="form-label">Amount</label>
+            <input type="text" class="form-control" id="exampleInputusername" [(ngModel)]="amnt" name="amount">
+         </div>
+        <div class="mb-3 text-center">
+         <button type="submit" class="btn btn-primary" name="submit">DEPOSIT</button>
+        </div>
+    </form>
+
+    <h1 class="text-center text-decoration-underline mt-5">WITHDRAW</h1>
+    <form class="container w-50 p-5 mt-5" (ngSubmit)="withdraw()">
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label">Account number</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="accN" [(ngModel)]="acnoo">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input type="password" class="form-control" id="exampleInputPassword1" name="passwor" [(ngModel)]="psww">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputusername" class="form-label">Amount</label>
+            <input type="text" class="form-control" id="exampleInputusername" name="amoun" [(ngModel)]="amntt">
+         </div>
+        <div class="mb-3 text-center">
+         <button type="submit" class="btn btn-primary" name="submi">WITHDRAW</button>
+        </div>
+    </form>
+</body>
+</html>

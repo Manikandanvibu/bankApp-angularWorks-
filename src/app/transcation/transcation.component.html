@@ -1,0 +1,15 @@
+<div class="container w-75 p-5  border border-white" style="background: rgba(0, 0, 0, 0.5);color: #fff;margin-top: 10rem;">
+    <h1 class="text-center pb-4">Transcation History</h1>
+<table class=" border border-white w-100 text-center">
+    <thead>
+        <th class="border border-white w-25">Type</th>
+        <th class="border border-white w-25">Amount</th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let i of transcation">
+            <td class="border border-white">{{i.type}}</td>
+            <td class="border border-white">{{i.amount}}</td>
+        </tr>
+    </tbody>
+</table>
+</div>

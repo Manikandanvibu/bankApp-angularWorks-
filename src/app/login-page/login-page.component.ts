@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from '../services/data.service';
 
 @Component({
   selector: 'app-login-page',
@@ -9,16 +10,16 @@ import { Router } from '@angular/router';
 export class LoginPageComponent {
   acno=''
   psw=''
-  // database storage
-  userDetails:any={
-    1000:{acno:1000,username:"anu",password:123,balance:0},
-    1001:{acno:1001,username:"amal",password:123,balance:0},
-    1002:{acno:1002,username:"arun",password:123,balance:0},
-    1003:{acno:1003,username:"mega",password:123,balance:0},
-  }
+  // // database storage
+  // userDetails:any={
+  //   1000:{acno:1000,username:"anu",password:123,balance:0},
+  //   1001:{acno:1001,username:"amal",password:123,balance:0},
+  //   1002:{acno:1002,username:"arun",password:123,balance:0},
+  //   1003:{acno:1003,username:"mega",password:123,balance:0},
+  // }
 
   // dependecy injection of router class of navigatebyurl
-  constructor(private router:Router){}
+  constructor(private router:Router,private ds:DataService){}
 
   
   // // acc and psw chane capturing from input
@@ -31,24 +32,25 @@ export class LoginPageComponent {
     
   // }
   // checks input and databse for login
-  login(){
-    // var acno called to avoid calling this.acno
-    var acno=this.acno
-    var psw=this.psw
-    var userDetails=this.userDetails
-    if(acno in userDetails){
-      if(psw==userDetails[acno]["password"]){
-        alert("login successfull")
-        this.router.navigateByUrl("dashboard")
-      }
-      else{
-        alert("wrong password")
-      } 
-    }
-    else{
-      alert("user not excist")
-    }
-  }
+  // next method
+  // login(){
+  //   // var acno called to avoid calling this.acno
+  //   var acno=this.acno
+  //   var psw=this.psw
+  //   var userDetails=this.userDetails
+  //   if(acno in userDetails){
+  //     if(psw==userDetails[acno]["password"]){
+  //       alert("login successfull")
+  //       this.router.navigateByUrl("dashboard")
+  //     }
+  //     else{
+  //       alert("wrong password")
+  //     } 
+  //   }
+  //   else{
+  //     alert("user not excist")
+  //   }
+  // }
 // 2- method
   // login(a:any,b:any){
 
@@ -71,4 +73,17 @@ export class LoginPageComponent {
   //   }
   // }
   
+
+  login(){
+    var acno=this.acno
+    var psw=this.psw
+    const result=this.ds.login(acno,psw)
+    if(result){
+      alert("login success")
+      this.router.navigateByUrl('dashboard')
+    }
+    else{
+      alert('incorrect username or password')
+    }
+  }
 }
