@@ -10,11 +10,23 @@
     <div class="login-box">
         <img src="../../assets/avatar.png" class="avatar">
         <h1 style="text-transform: uppercase;text-shadow: 2px 2px 4px #000000;">Bank Login</h1>
-        <form (ngSubmit)="login()">
+        <form (ngSubmit)="login()" [formGroup]="loginForm">
             <p>Account Number</p>
-            <input type="text" name="accNo"  placeholder="Enter AccNo" id="acid" [(ngModel)]="acno" >
+            <input type="text" name="accNo"  placeholder="Enter AccNo" id="acid" formControlName="acno">
+
+            <div *ngIf="this.loginForm.get('acno')?.errors && this.loginForm.get('acno')?.touched">
+                <p class="text-danger">incorrect acno</p>
+            </div>
+
+
             <p>Password</p>
-            <input type="password" name="password"  placeholder="Enter Password" id="pid" [(ngModel)]="psw" >
+            <input type="password" name="password"  placeholder="Enter Password" id="pid" formControlName="psw">
+
+            <div *ngIf="this.loginForm.get('psw')?.errors && this.loginForm.get('psw')?.touched">
+                <p class="text-danger">incorrect psw</p>
+            </div>
+
+
             <input type="submit" name="submit" value="Login" (click)="login()">
             <a routerLink="register">Register Account</a>    
         </form>           

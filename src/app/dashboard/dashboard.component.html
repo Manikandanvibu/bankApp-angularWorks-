@@ -13,38 +13,67 @@
   <a routerLink="/transcation" class="p-4 ms-3 border border-white" style="background-color: rgb(221, 235, 236); text-decoration: none; border-radius: 20px;" >view transcation history</a>
 
     <h1 class="text-center text-decoration-underline">DEPOSIT</h1>
-    <form class="container w-50 p-5 mt-5" (ngSubmit)="deposit()">
+    <form class="container w-50 p-5 mt-5" (ngSubmit)="deposit()" [formGroup]="depositt">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Account number</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="acno" name="accNo">
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="accNo" formControlName="acno">
         </div>
+        <div *ngIf="this.depositt.get('acno')?.errors && this.depositt.get('acno')?.touched">
+          <p class="text-danger">incorect acno</p>
+        </div>
+
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="psw" name="password">
+          <input type="password" class="form-control" id="exampleInputPassword1"  name="password" formControlName="psw">
         </div>
+        <div *ngIf="this.depositt.get('psw')?.errors && this.depositt.get('psw')?.touched">
+          <p class="text-danger">incorrect password</p>
+        </div>
+
+
         <div class="mb-3">
             <label for="exampleInputusername" class="form-label">Amount</label>
-            <input type="text" class="form-control" id="exampleInputusername" [(ngModel)]="amnt" name="amount">
-         </div>
+            <input type="text" class="form-control" id="exampleInputusername"  name="amount" formControlName="amnt">
+        </div>
+        <div *ngIf="this.depositt.get('amnt')?.errors && this.depositt.get('amnt')?.touched">
+          <p class="text-danger">incorrect amount value</p>
+        </div>
+
+
         <div class="mb-3 text-center">
          <button type="submit" class="btn btn-primary" name="submit">DEPOSIT</button>
         </div>
     </form>
 
     <h1 class="text-center text-decoration-underline mt-5">WITHDRAW</h1>
-    <form class="container w-50 p-5 mt-5" (ngSubmit)="withdraw()">
+    <form class="container w-50 p-5 mt-5" (ngSubmit)="withdraw()" [formGroup]="withdraww">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Account number</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="accN" [(ngModel)]="acnoo">
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="accN" formControlName="acnoo">
         </div>
+        <div *ngIf="this.withdraww.get('acnoo')?.errors && this.withdraww.get('acnoo')?.touched">
+          <p class="text-danger">incorect acno</p>
+        </div>
+
+
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" name="passwor" [(ngModel)]="psww">
+          <input type="password" class="form-control" id="exampleInputPassword1" name="passwor" formControlName="psww">
         </div>
+        <div *ngIf="this.withdraww.get('psww')?.errors && this.withdraww.get('psww')?.touched">
+          <p class="text-danger">incorrect password</p>
+        </div>
+
+
         <div class="mb-3">
             <label for="exampleInputusername" class="form-label">Amount</label>
-            <input type="text" class="form-control" id="exampleInputusername" name="amoun" [(ngModel)]="amntt">
+            <input type="text" class="form-control" id="exampleInputusername" name="amoun" formControlName="amntt">
          </div>
+        <div *ngIf="this.withdraww.get('amntt')?.errors && this.withdraww.get('amntt')?.touched">
+          <p class="text-danger">incorrect amount value</p>
+        </div>
+
+
         <div class="mb-3 text-center">
          <button type="submit" class="btn btn-primary" name="submi">WITHDRAW</button>
         </div>

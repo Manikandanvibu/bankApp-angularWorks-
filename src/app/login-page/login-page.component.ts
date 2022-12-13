@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
@@ -8,8 +9,9 @@ import { DataService } from '../services/data.service';
   styleUrls: ['./login-page.component.css']
 })
 export class LoginPageComponent {
-  acno=''
-  psw=''
+  // acno=''
+  // psw=''
+
   // // database storage
   // userDetails:any={
   //   1000:{acno:1000,username:"anu",password:123,balance:0},
@@ -19,9 +21,13 @@ export class LoginPageComponent {
   // }
 
   // dependecy injection of router class of navigatebyurl
-  constructor(private router:Router,private ds:DataService){}
+  constructor(private router:Router,private ds:DataService,private fb:FormBuilder){}
 
-  
+  loginForm=this.fb.group({acno:['',[Validators.required,Validators.pattern('[0-9]+')]],
+  psw:['',[Validators.required,Validators.pattern('[0-9]+')]]})
+
+
+
   // // acc and psw chane capturing from input
   // acnoChange(event:any){
   //   this.acno=event.target.value
@@ -75,15 +81,21 @@ export class LoginPageComponent {
   
 
   login(){
-    var acno=this.acno
-    var psw=this.psw
+    var acno=this.loginForm.value.acno
+    var psw=this.loginForm.value.psw
+    
     const result=this.ds.login(acno,psw)
-    if(result){
-      alert("login success")
-      this.router.navigateByUrl('dashboard')
+    if(this.loginForm.valid){
+      if(result){
+        alert("login success")
+        this.router.navigateByUrl('dashboard')
+      }
+      else{
+        alert('incorrect username or password')
+      }
     }
     else{
-      alert('incorrect username or password')
+      alert("invalid acno or password")
     }
   }
 }

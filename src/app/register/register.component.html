@@ -8,19 +8,34 @@
 </head>
 <body>
     <h1 class="text-center text-decoration-underline">ACCOUNT REGISTRATION</h1>
-    <form class="container w-50 p-5 mt-5" (ngSubmit)="register()">
+    <form class="container w-50 p-5 mt-5" (ngSubmit)="register()"  [formGroup]="registerForm">
         <div class="mb-3">
           <label for="exampleInputEmail1" class="form-label">Account number</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" [(ngModel)]="uname" name="acc">
+          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" formControlName="acno">
         </div>
+
+        <div *ngIf="this.registerForm.get('acno')?.errors && this.registerForm.get('acno')?.touched">
+          <p class="text-danger">incorrect acno</p>
+        </div>
+
         <div class="mb-3">
           <label for="exampleInputusername" class="form-label">username</label>
-          <input type="text" class="form-control" id="exampleInputusername" [(ngModel)]="acno" name="user">
+          <input type="text" class="form-control" id="exampleInputusername" formControlName="uname">
         </div>
+
+        <div *ngIf="this.registerForm.get('uname')?.errors && this.registerForm.get('uname')?.touched">
+          <p class="text-danger">incorrect uname</p>
+        </div>
+
         <div class="mb-3">
           <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" [(ngModel)]="psw" name="pass">
+          <input type="password" class="form-control" id="exampleInputPassword1" formControlName="psw">
         </div>
+
+        <div *ngIf="this.registerForm.get('psw')?.errors && this.registerForm.get('psw')?.touched">
+          <p class="text-danger">incorrect psw</p>
+        </div>
+        
         <div class="mb-3 text-center">
          <button type="submit" class="btn btn-primary">Register</button>
         </div>
