@@ -4,18 +4,47 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class DataService {
-
+userDetails:any
 currentuser=''
 currentacno=''
 
-  constructor() { }
-
-  userDetails:any={
-    1000:{acno:1000,username:"anu",password:123,balance:0,transcation:[]},
-    1001:{acno:1001,username:"amal",password:123,balance:0,transcation:[]},
-    1002:{acno:1002,username:"arun",password:123,balance:0,transcation:[]},
-    1003:{acno:1003,username:"mega",password:123,balance:0,transcation:[]},
+  constructor() { 
+    this.getdeatails()
   }
+// method for storaing in localstorage
+savedetails(){
+  if(this.userDetails){
+  localStorage.setItem("databse",JSON.stringify(this.userDetails))
+  }
+  if(this.currentacno){
+    localStorage.setItem("currentacno",JSON.stringify(this.currentacno))
+    }
+  if(this.currentuser){
+  localStorage.setItem("currentuser",JSON.stringify(this.currentuser))
+  }
+}
+
+// method for getting details from localstorage
+// || '' is used because in angular there is not sure of getting data from databse so if the databse is also empty we need no mention an (or string)
+
+getdeatails(){
+  if(localStorage.getItem('databse')){
+    this.userDetails=JSON.parse(localStorage.getItem('databse') || '')
+  }
+  if(localStorage.getItem('currentuser')){
+    this.currentuser=JSON.parse(localStorage.getItem('currentuser') || '')
+  }
+  if(localStorage.getItem('currentacno')){
+    this.currentacno=JSON.parse(localStorage.getItem('currentacno') || '')
+  }
+}
+
+  // userDetails:any={
+  //   1000:{acno:1000,username:"anu",password:123,balance:0,transcation:[]},
+  //   1001:{acno:1001,username:"amal",password:123,balance:0,transcation:[]},
+  //   1002:{acno:1002,username:"arun",password:123,balance:0,transcation:[]},
+  //   1003:{acno:1003,username:"mega",password:123,balance:0,transcation:[]},
+  // }
 
   register(acno:any,uname:any,psw:any){
     var userDetails=this.userDetails
@@ -25,6 +54,7 @@ currentacno=''
     else{
       userDetails[acno]={acno,username:uname,password:psw,balance:0,transcation:[]}
       console.log(this.userDetails[acno]);
+      this.savedetails()
       return true
     }
   }
@@ -34,10 +64,12 @@ currentacno=''
     var userDetails=this.userDetails
     if(acno in userDetails){
       if(psw==userDetails[acno]["password"]){
-        // store username of login person
-        this.currentuser=userDetails[acno]["username"]
         // store accno of login person for transcation purpose
         this.currentacno=acno
+        // store username of login person
+        this.currentuser=userDetails[acno]["username"]
+
+        this.savedetails()
         return true
       }
       else{
@@ -57,6 +89,9 @@ currentacno=''
       if(password==userDetails[acno]["password"]){
         userDetails[acno]["balance"]+=amnt
         userDetails[acno]['transcation'].push({type:'CREDIT',amount:amnt})
+        
+        this.savedetails()
+
         return userDetails[acno]["balance"]
       }
       else{
@@ -80,6 +115,9 @@ currentacno=''
         if(amntt<=userDetails[acno]["balance"]){
           userDetails[acno]["balance"]-=amntt
           userDetails[acno]['transcation'].push({type:'DEBIT',amount:amntt})
+
+          this.savedetails()
+
           return userDetails[acno]["balance"]
         }
         else{

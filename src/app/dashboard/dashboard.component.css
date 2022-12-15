@@ -8,4 +8,20 @@ form{
 }
 h1{
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size:4vw;
 }
+
+#but{
+    margin-right:19px
+}
+#butt{
+    margin-right:19px
+    
+}
+@media all and (max-width:30em){
+    button{
+        box-sizing: border-box;
+        font-size: small;
+        padding: 5px;
+    }
+    }

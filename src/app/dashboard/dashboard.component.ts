@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { DataService } from '../services/data.service';
 
 @Component({
@@ -18,10 +19,23 @@ export class DashboardComponent {
   // amntt=''
 
   user=''
+  acno:any
 
-  constructor(private ds:DataService,private fb:FormBuilder){
+  dateandtime:any
+
+  constructor(private ds:DataService,private fb:FormBuilder,private router:Router){
+    // date class object
+    this.dateandtime=new Date()
+
     // acess login user name
      this.user=this.ds.currentuser
+  }
+
+  ngOnInit(): void {
+    if(!localStorage.getItem('currentacno')){
+      alert(" plzz login first")
+      this.router.navigateByUrl('')
+    }
   }
 
 
@@ -72,5 +86,16 @@ export class DashboardComponent {
     else{
       alert("incorect name accno or password")
     }
+  }
+
+
+  logout(){
+    localStorage.removeItem('currentuser')
+    localStorage.removeItem('currentacno')
+    this.router.navigateByUrl('')
+  }
+
+  deleteconfirm(){
+    this.acno=JSON.parse(localStorage.getItem('currentacno') || '')
   }
 }

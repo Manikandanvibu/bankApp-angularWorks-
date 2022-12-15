@@ -1,82 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
+
 <body>
 
-  <h1 class="p-4 text-white">welcome {{user}}</h1>
+  <h1 class="ms-3 mb-5 text-decoration-underline" style="text-align: center;font-family: Arial, sans-serif;color: rgb(54, 26, 235);">Welcome {{user}}
+  </h1>
 
-  <a routerLink="/transcation" class="p-4 ms-3 border border-white" style="background-color: rgb(221, 235, 236); text-decoration: none; border-radius: 20px;" >view transcation history</a>
+  <a routerLink="/transcation" class="p-3 ms-3 border border-white"
+    style="background-color: rgb(221, 235, 236); text-decoration: none; border-radius: 20px; color: blueviolet; font-weight: 500;">view
+    transcation history</a>
 
-    <h1 class="text-center text-decoration-underline">DEPOSIT</h1>
-    <form class="container w-50 p-5 mt-5" (ngSubmit)="deposit()" [formGroup]="depositt">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Account number</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  name="accNo" formControlName="acno">
-        </div>
-        <div *ngIf="this.depositt.get('acno')?.errors && this.depositt.get('acno')?.touched">
-          <p class="text-danger">incorect acno</p>
-        </div>
-
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1"  name="password" formControlName="psw">
-        </div>
-        <div *ngIf="this.depositt.get('psw')?.errors && this.depositt.get('psw')?.touched">
-          <p class="text-danger">incorrect password</p>
-        </div>
+<!-- date and time with angular wipe for data conversion-->
+    <h1 class="p-3 ms-3">{{dateandtime | date : 'short'}}</h1>
+  <!-- delete button parent to child relation -->
+  <div class="container w-50 mt-3 mb-2 text-center p-3">
+    <button type="button" class="btn btn-danger text-center" (click)="logout()" id="but">logout</button>
+    <button type="button" class="btn btn-danger text-center" (click)="deleteconfirm()" id="butt">delete</button>
+  </div>
+  <app-deleteconform [item]="acno"></app-deleteconform>
 
 
-        <div class="mb-3">
-            <label for="exampleInputusername" class="form-label">Amount</label>
-            <input type="text" class="form-control" id="exampleInputusername"  name="amount" formControlName="amnt">
-        </div>
-        <div *ngIf="this.depositt.get('amnt')?.errors && this.depositt.get('amnt')?.touched">
-          <p class="text-danger">incorrect amount value</p>
-        </div>
+  <form class="container w-50 p-5 mt-5" (ngSubmit)="deposit()" [formGroup]="depositt" [ngClass]="acno ? 'style':'' ">
+    <h1 class="text-center  mt-2" style="color: aqua;">DEPOSIT AMOUNT</h1>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Account number</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="accNo"
+        formControlName="acno">
+    </div>
+    <div *ngIf="this.depositt.get('acno')?.errors && this.depositt.get('acno')?.touched">
+      <p class="text-danger">incorect acno</p>
+    </div>
+
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" name="password" formControlName="psw">
+    </div>
+    <div *ngIf="this.depositt.get('psw')?.errors && this.depositt.get('psw')?.touched">
+      <p class="text-danger">incorrect password</p>
+    </div>
 
 
-        <div class="mb-3 text-center">
-         <button type="submit" class="btn btn-primary" name="submit">DEPOSIT</button>
-        </div>
-    </form>
-
-    <h1 class="text-center text-decoration-underline mt-5">WITHDRAW</h1>
-    <form class="container w-50 p-5 mt-5" (ngSubmit)="withdraw()" [formGroup]="withdraww">
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Account number</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="accN" formControlName="acnoo">
-        </div>
-        <div *ngIf="this.withdraww.get('acnoo')?.errors && this.withdraww.get('acnoo')?.touched">
-          <p class="text-danger">incorect acno</p>
-        </div>
+    <div class="mb-3">
+      <label for="exampleInputusername" class="form-label">Amount</label>
+      <input type="text" class="form-control" id="exampleInputusername" name="amount" formControlName="amnt">
+    </div>
+    <div *ngIf="this.depositt.get('amnt')?.errors && this.depositt.get('amnt')?.touched">
+      <p class="text-danger">incorrect amount value</p>
+    </div>
 
 
-        <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" name="passwor" formControlName="psww">
-        </div>
-        <div *ngIf="this.withdraww.get('psww')?.errors && this.withdraww.get('psww')?.touched">
-          <p class="text-danger">incorrect password</p>
-        </div>
+    <div class="mb-3 text-center">
+      <button type="submit" class="btn btn-primary" name="submit" style="min-width: 60px;">DEPOSIT</button>
+    </div>
+  </form>
+
+  <form class="container w-50 p-5 mt-5 mb-5" (ngSubmit)="withdraw()" [formGroup]="withdraww" [ngClass]="acno? 'style' : '' ">
+    <h1 class="text-center  mt-3" style="color: aqua;">WITHDRAW AMOUNT</h1>
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Account number</label>
+      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="accN"
+        formControlName="acnoo">
+    </div>
+    <div *ngIf="this.withdraww.get('acnoo')?.errors && this.withdraww.get('acnoo')?.touched">
+      <p class="text-danger">incorect acno</p>
+    </div>
 
 
-        <div class="mb-3">
-            <label for="exampleInputusername" class="form-label">Amount</label>
-            <input type="text" class="form-control" id="exampleInputusername" name="amoun" formControlName="amntt">
-         </div>
-        <div *ngIf="this.withdraww.get('amntt')?.errors && this.withdraww.get('amntt')?.touched">
-          <p class="text-danger">incorrect amount value</p>
-        </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input type="password" class="form-control" id="exampleInputPassword1" name="passwor" formControlName="psww">
+    </div>
+    <div *ngIf="this.withdraww.get('psww')?.errors && this.withdraww.get('psww')?.touched">
+      <p class="text-danger">incorrect password</p>
+    </div>
 
 
-        <div class="mb-3 text-center">
-         <button type="submit" class="btn btn-primary" name="submi">WITHDRAW</button>
-        </div>
-    </form>
+    <div class="mb-3">
+      <label for="exampleInputusername" class="form-label">Amount</label>
+      <input type="text" class="form-control" id="exampleInputusername" name="amoun" formControlName="amntt">
+    </div>
+    <div *ngIf="this.withdraww.get('amntt')?.errors && this.withdraww.get('amntt')?.touched">
+      <p class="text-danger">incorrect amount value</p>
+    </div>
+
+
+    <div class="mb-3 text-center">
+      <button type="submit" class="btn btn-primary" name="submi" style="min-width: 30px;">WITHDRAW</button>
+    </div>
+
+  </form>
+
 </body>
+
 </html>
