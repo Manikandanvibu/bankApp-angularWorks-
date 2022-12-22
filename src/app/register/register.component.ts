@@ -15,7 +15,8 @@ export class RegisterComponent {
 
   constructor(private ds:DataService, private router:Router,private fb:FormBuilder){}
 // formbuilder method group to collect input data
-  registerForm=this.fb.group({uname:['',[Validators.required,Validators.pattern('[a-z A-Z]+')]],
+  registerForm=this.fb.group({
+  uname:['',[Validators.required,Validators.pattern('[a-z A-Z]+')]],
   acno:['',[Validators.required,Validators.pattern('[0-9]+')]],
   psw:['',[Validators.required,Validators.pattern('[0-9]+')]]
 })

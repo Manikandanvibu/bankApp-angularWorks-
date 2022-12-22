@@ -98,4 +98,8 @@ export class DashboardComponent {
   deleteconfirm(){
     this.acno=JSON.parse(localStorage.getItem('currentacno') || '')
   }
+
+  oncancel(){
+    this.acno=''
+  }
 }
